@@ -1,0 +1,80 @@
+﻿@page
+@model nebrangu.Pages.Prekes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Product.Id" />
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <input asp-for="Product.Description" class="form-control" />
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Rating" class="control-label"></label>
+                <input asp-for="Product.Rating" class="form-control" />
+                <span asp-validation-for="Product.Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.RatingCount" class="control-label"></label>
+                <input asp-for="Product.RatingCount" class="form-control" />
+                <span asp-validation-for="Product.RatingCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.CategoryId" class="control-label"></label>
+                <select asp-for="Product.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ManufacturerId" class="control-label"></label>
+                <select asp-for="Product.ManufacturerId" class="form-control" asp-items="ViewBag.ManufacturerId"></select>
+                <span asp-validation-for="Product.ManufacturerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.WeatherId" class="control-label"></label>
+                <select asp-for="Product.WeatherId" class="form-control" asp-items="ViewBag.WeatherId"></select>
+                <span asp-validation-for="Product.WeatherId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.SeasonId" class="control-label"></label>
+                <select asp-for="Product.SeasonId" class="form-control" asp-items="ViewBag.SeasonId"></select>
+                <span asp-validation-for="Product.SeasonId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.OriginCountry" class="control-label"></label>
+                <input asp-for="Product.OriginCountry" class="form-control" />
+                <span asp-validation-for="Product.OriginCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

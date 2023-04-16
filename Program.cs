@@ -1,3 +1,9 @@
+using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using nebrangu.Data;
+
 namespace nebrangu
 {
 	public class Program
@@ -6,8 +12,18 @@ namespace nebrangu
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
-			builder.Services.AddRazorPages();
+            var configuration = new ConfigurationBuilder()
+			.AddJsonFile("appsettings.json")
+			.Build();
+
+            string connectionString = configuration.GetConnectionString("MySqlConnection");
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+			builder.Services.AddDbContext<nebranguContext>(options =>
+			    options.UseMySQL(builder.Configuration.GetConnectionString("MySqlConnection") ?? throw new InvalidOperationException("Connection string 'nebranguContext' not found.")));
+
+            // Add services to the container.
+            builder.Services.AddRazorPages();
 
 			var app = builder.Build();
 
