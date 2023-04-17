@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace nebrangu.Models
 {
     public class Product
-    {
+    {        
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Pavadinimas yra privalomas")]

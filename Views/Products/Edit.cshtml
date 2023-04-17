@@ -29,16 +29,6 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Rating" class="control-label"></label>
-                <input asp-for="Rating" class="form-control" />
-                <span asp-validation-for="Rating" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RatingCount" class="control-label"></label>
-                <input asp-for="RatingCount" class="form-control" />
-                <span asp-validation-for="RatingCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
@@ -71,6 +61,7 @@
 </div>
 
 <div>
+    <a asp-action="Index">Add to basket</a>
     <a asp-action="Index">Back to List</a>
 </div>
 

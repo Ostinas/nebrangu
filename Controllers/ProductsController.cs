@@ -7,39 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using nebrangu;
 using nebrangu.Models;
+using nebrangu.Repositories;
 
 namespace nebrangu.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly nebranguContext _context;
+        private ProductsRepo _repo;
 
         public ProductsController(nebranguContext context)
         {
             _context = context;
+            _repo = new ProductsRepo(_context);
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var nebranguContext = _context.Products.Include(p => p.Category).Include(p => p.Manufacturer).Include(p => p.Season).Include(p => p.Weather);
-            return View(await nebranguContext.ToListAsync());
+            var products = await _repo.GetAll();
+            return View(products);
         }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null || _context.Products == null || _repo.GetById((int)id) == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.Category)
-                .Include(p => p.Manufacturer)
-                .Include(p => p.Season)
-                .Include(p => p.Weather)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _repo.GetById((int)id);
             if (product == null)
             {
                 return NotFound();
@@ -67,8 +65,7 @@ namespace nebrangu.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                await _repo.Create(product);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
@@ -85,8 +82,8 @@ namespace nebrangu.Controllers
             {
                 return NotFound();
             }
-
-            var product = await _context.Products.FindAsync(id);
+            
+            var product = await _repo.GetById((int)id);
             if (product == null)
             {
                 return NotFound();
@@ -105,17 +102,13 @@ namespace nebrangu.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,Rating,RatingCount,CategoryId,ManufacturerId,WeatherId,SeasonId,OriginCountry")] Product product)
         {
-            if (id != product.Id)
-            {
-                return NotFound();
-            }
+            bool valid = CheckChanges(id, product);
 
-            if (ModelState.IsValid)
+            if (valid)
             {
                 try
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    await _repo.Update(product);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -135,6 +128,11 @@ namespace nebrangu.Controllers
             ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name", product.SeasonId);
             ViewData["WeatherId"] = new SelectList(_context.Weathers, "Id", "Name", product.WeatherId);
             return View(product);
+        }
+
+        public bool CheckChanges(int id, Product product)
+        {
+            return ModelState.IsValid && id == product.Id;
         }
 
         // GET: Products/Delete/5
@@ -168,13 +166,13 @@ namespace nebrangu.Controllers
             {
                 return Problem("Entity set 'nebranguContext.Products'  is null.");
             }
-            var product = await _context.Products.FindAsync(id);
+            var product = await _repo.GetById(id);
             if (product != null)
             {
                 _context.Products.Remove(product);
             }
-            
-            await _context.SaveChangesAsync();
+
+            await _repo.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
