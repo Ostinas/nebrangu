@@ -19,7 +19,12 @@ namespace nebrangu.Repositories
 
         public async Task<Product> GetById(int id)
         {
-            return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Manufacturer)
+                .Include(p => p.Season)
+                .Include(p => p.Weather)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Product> Create(Product product)

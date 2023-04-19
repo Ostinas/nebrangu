@@ -26,13 +26,13 @@ namespace nebrangu.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _repo.GetAll();
-            return View(products);
+            return View("ProductPage", products);
         }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Products == null || _repo.GetById((int)id) == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
@@ -43,7 +43,7 @@ namespace nebrangu.Controllers
                 return NotFound();
             }
 
-            return View(product);
+            return View("ProductDetailsPage", product);
         }
 
         // GET: Products/Create
@@ -53,7 +53,7 @@ namespace nebrangu.Controllers
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturers, "Id", "Name");
             ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name");
             ViewData["WeatherId"] = new SelectList(_context.Weathers, "Id", "Name");
-            return View();
+            return View("ProductCreationPage");
         }
 
         // POST: Products/Create
@@ -61,17 +61,18 @@ namespace nebrangu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Rating,RatingCount,CategoryId,ManufacturerId,WeatherId,SeasonId,OriginCountry")] Product product)
+        public async Task<IActionResult> Create([FromForm] Product product)
         {
-            if (ModelState.IsValid)
+            if (CheckDetails(product))
             {
                 return RedirectToAction(nameof(CreateConfirm), product);
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
-            ViewData["ManufacturerId"] = new SelectList(_context.Manufacturers, "Id", "Name", product.ManufacturerId);
-            ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name", product.SeasonId);
-            ViewData["WeatherId"] = new SelectList(_context.Weathers, "Id", "Name", product.WeatherId);
-            return View(product);
+            //ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            //ViewData["ManufacturerId"] = new SelectList(_context.Manufacturers, "Id", "Name", product.ManufacturerId);
+            //ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name", product.SeasonId);
+            //ViewData["WeatherId"] = new SelectList(_context.Weathers, "Id", "Name", product.WeatherId);
+            await _repo.Create(product);
+            return RedirectToAction("Index");
         }
         
         // POST: Products/CreateConfirm
@@ -79,10 +80,9 @@ namespace nebrangu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateConfirm([Bind("Id,Name,Description,Price,Rating,RatingCount,CategoryId,ManufacturerId,WeatherId,SeasonId,OriginCountry")] Product product)
+        public async Task<IActionResult> CreateConfirm([FromForm] Product product)
         {
-            await _repo.Create(product);
-            return RedirectToAction(nameof(Index));
+            return View("CreateConfirm", product);
         }
 
         // GET: Products/Edit/5
@@ -102,7 +102,7 @@ namespace nebrangu.Controllers
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturers, "Id", "Name", product.ManufacturerId);
             ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name", product.SeasonId);
             ViewData["WeatherId"] = new SelectList(_context.Weathers, "Id", "Name", product.WeatherId);
-            return RedirectToAction("Index", "Home");
+            return View("ProductEditPage", product);
         }
 
         // POST: Products/Edit/5
@@ -137,18 +137,35 @@ namespace nebrangu.Controllers
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturers, "Id", "Name", product.ManufacturerId);
             ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name", product.SeasonId);
             ViewData["WeatherId"] = new SelectList(_context.Weathers, "Id", "Name", product.WeatherId);
-            return View(product);
-        }
-
-        public bool CheckChanges(int id, Product product)
-        {
-            return ModelState.IsValid && id == product.Id;
+            return RedirectToAction("Index");
         }
 
         // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Products == null)
+            if (_context.Products == null)
+            {
+                return NotFound();
+            }
+            await _repo.Delete(id);
+            //var product = await _context.Products
+            //    .Include(p => p.Category)
+            //    .Include(p => p.Manufacturer)
+            //    .Include(p => p.Season)
+            //    .Include(p => p.Weather)
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            //if (product == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return View(product);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeletePage(int id)
+        {
+            if (_context.Products == null)
             {
                 return NotFound();
             }
@@ -164,7 +181,8 @@ namespace nebrangu.Controllers
                 return NotFound();
             }
 
-            return View(product);
+            return View("ProductDeletionPage", product);
+            //return RedirectToAction("Index");
         }
 
         // POST: Products/Delete/5
@@ -186,9 +204,20 @@ namespace nebrangu.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        //TODO: change to private
+        public bool ProductExists(int id)
         {
           return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public bool CheckChanges(int id, Product product)
+        {
+            return id == product.Id;
+        }
+
+        public bool CheckDetails(Product product)
+        {
+            return product.Name == null ? true : false;
         }
     }
 }

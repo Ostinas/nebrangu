@@ -4,10 +4,10 @@
     ViewData["Title"] = "Prekės peržiūra";
 }
 
-<h1>Details</h1>
+<h1>Prekės peržiūra</h1>
 
 <div>
-    <h4>Product</h4>
+    <h4>Prekė</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -75,4 +75,5 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Redaguoti prekę</a> |
     <a asp-action="AddToCart" asp-route-id="@Model?.Id">Įdėti į krepšelį</a>
+    @*<a asp-action="Delete" asp-route-id="@Model?.Id">Ištrinti prekę</a>*@
 </div>

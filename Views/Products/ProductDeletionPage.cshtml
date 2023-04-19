@@ -1,0 +1,41 @@
+﻿@model nebrangu.Models.Product
+
+@{
+    ViewData["Title"] = "Prekės trynimo patvirtinimas";
+}
+
+<h1>Prekės trynimo patvirtnimas</h1>
+
+<h3>Ar tikrai norite ištrinti šią prekę?</h3>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" disabled />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" disabled />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" disabled />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OriginCountry" class="control-label"></label>
+                <input asp-for="OriginCountry" class="form-control" disabled />
+                <span asp-validation-for="OriginCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br />
+                <input type="submit" value="Ištrinti šią prekę" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
