@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<nebrangu.Models.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Prekių katalogas";
 }
 
-<h1>Index</h1>
+<h1>Prekių katalogas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Prekės sukūrimas</a>
 </p>
 <table class="table">
     <thead>
@@ -67,21 +67,19 @@
                 @Html.DisplayFor(modelItem => item.OriginCountry)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
+				Mobilusis telefonas
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer.Name)
+				Samsung
+            </td>
+			<td>
+				Visi
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Weather.Name)
+				Visi
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Season.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Peržiūrėti</a>
             </td>
         </tr>
 }

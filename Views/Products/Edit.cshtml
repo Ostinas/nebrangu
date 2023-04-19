@@ -1,7 +1,7 @@
 ﻿@model nebrangu.Models.Product
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Prekės redagavimas";
 }
 
 <h1>Edit</h1>
@@ -58,11 +58,11 @@
             </div>
         </form>
     </div>
+    <a asp-action="EditDiscounts" asp-route-id="">Valdyti nuolaidas</a>
 </div>
 
 <div>
-    <a asp-action="Index">Add to basket</a>
-    <a asp-action="Index">Back to List</a>
+
 </div>
 
 @section Scripts {

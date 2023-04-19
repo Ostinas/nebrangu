@@ -1,12 +1,12 @@
 ﻿@model nebrangu.Models.Product
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Prekės sūkūrimas";
 }
 
-<h1>Create</h1>
+<h1>Sukūrimas</h1>
 
-<h4>Product</h4>
+<h4>Prekė</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -59,14 +59,11 @@
                 <span asp-validation-for="OriginCountry" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+				<br />
+                <input type="submit" value="Sukūrti" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

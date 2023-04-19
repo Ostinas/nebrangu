@@ -10,7 +10,7 @@ namespace nebrangu.Repositories
         public ProductsRepo(nebranguContext context)
         {
             _context = context;
-        }
+        } 
 
         public async Task<List<Product>> GetAll()
         {

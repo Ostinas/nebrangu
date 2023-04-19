@@ -65,14 +65,24 @@ namespace nebrangu.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _repo.Create(product);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CreateConfirm), product);
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturers, "Id", "Name", product.ManufacturerId);
             ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name", product.SeasonId);
             ViewData["WeatherId"] = new SelectList(_context.Weathers, "Id", "Name", product.WeatherId);
             return View(product);
+        }
+        
+        // POST: Products/CreateConfirm
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateConfirm([Bind("Id,Name,Description,Price,Rating,RatingCount,CategoryId,ManufacturerId,WeatherId,SeasonId,OriginCountry")] Product product)
+        {
+            await _repo.Create(product);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Products/Edit/5
@@ -92,7 +102,7 @@ namespace nebrangu.Controllers
             ViewData["ManufacturerId"] = new SelectList(_context.Manufacturers, "Id", "Name", product.ManufacturerId);
             ViewData["SeasonId"] = new SelectList(_context.Seasons, "Id", "Name", product.SeasonId);
             ViewData["WeatherId"] = new SelectList(_context.Weathers, "Id", "Name", product.WeatherId);
-            return View(product);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Products/Edit/5
