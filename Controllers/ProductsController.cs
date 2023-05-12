@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using nebrangu;
 using nebrangu.Models;
 using nebrangu.Repositories;
+using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Mozilla;
 
 namespace nebrangu.Controllers
@@ -221,17 +222,48 @@ namespace nebrangu.Controllers
             return product.Name == null ? true : false;
         }
 
-        public int SaveCartProductCount(int id)
+        public int SaveCartProductCount(int id, int newCount)
         {
-            // todo: get count of the product in user's shopping basket and call 5 (increaseproductcountincookies)
-            
-            return IncreaseProductCountInCookies(id);
+            StocksRepo stocks = new StocksRepo(_context);
+            int productStockCount = stocks.GetProductStock(id);
+
+            // Get product count from cookies
+            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+            Dictionary<int, int> cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson);
+
+            if (productStockCount >= newCount)
+            {
+                return ChangeProductCountInCookies(id, newCount);
+            }
+            return 0;
         }
 
-        public int IncreaseProductCountInCookies(int id)
+        public int ChangeProductCountInCookies(int id, int newCount)
         {
-            // todo: save new count into cookies, return new count
-            return 1;
+            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+            Dictionary<int, int> cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson);
+            cart[id] = newCount;
+            
+            string cartCookieJsonNew = JsonConvert.SerializeObject(cart);
+            HttpContext.Response.Cookies.Append("cart", cartCookieJsonNew);
+
+            return newCount;
+        }
+
+        public IResponseCookies DeleteProductFromCart(int id)
+        {
+            return RemoveProductFromCookies(id);
+        }
+
+        public IResponseCookies RemoveProductFromCookies(int id)
+        {
+            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+            Dictionary<int, int> cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson);
+            cart.Remove(id);
+
+            string cartCookieJsonNew = JsonConvert.SerializeObject(cart);
+            HttpContext.Response.Cookies.Append("cart", cartCookieJsonNew);
+            return HttpContext.Response.Cookies;
         }
     }
 }
