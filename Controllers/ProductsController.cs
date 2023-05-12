@@ -222,6 +222,19 @@ namespace nebrangu.Controllers
             return product.Name == null ? true : false;
         }
 
+        public async Task<IActionResult> Krepselis()
+        {
+            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+
+            Dictionary<int, int> cart = !string.IsNullOrEmpty(cartCookieJson) ? JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson) : new Dictionary<int, int>();
+
+            var products = from p in _context.Products
+                           where cart.Keys.Contains(p.Id)
+                           select p;
+
+            return View("ShoppingCartPage", products);
+        }
+
         public int SaveCartProductCount(int id, int newCount)
         {
             StocksRepo stocks = new StocksRepo(_context);
@@ -235,7 +248,7 @@ namespace nebrangu.Controllers
             {
                 return ChangeProductCountInCookies(id, newCount);
             }
-            return 0;
+            return -1;
         }
 
         public int ChangeProductCountInCookies(int id, int newCount)
