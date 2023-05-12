@@ -19,6 +19,8 @@ namespace nebrangu
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Weather> Weathers { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
