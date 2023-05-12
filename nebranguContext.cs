@@ -26,5 +26,8 @@ namespace nebrangu
 
             // define any custom model configuration here, such as setting up relationships between entities
         }
+
+
+        public DbSet<nebrangu.Models.User> User { get; set; } = default!;
     }
 }
