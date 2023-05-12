@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu\\nebrangu.csproj": {}
+    "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu\\nebrangu.csproj": {
+    "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu\\nebrangu.csproj",
+        "projectUniqueName": "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu.csproj",
         "projectName": "nebrangu",
-        "projectPath": "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu\\nebrangu.csproj",
+        "projectPath": "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu.csproj",
         "packagesPath": "C:\\Users\\zilvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu\\obj\\",
+        "outputPath": "C:\\Users\\zilvi\\Desktop\\nebrangu\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\zilvi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -42,17 +42,17 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.4, )"
+              "version": "[7.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.4, )"
+              "version": "[7.0.5, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[7.0.5, )"
+              "version": "[7.0.6, )"
             },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
