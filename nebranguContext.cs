@@ -19,6 +19,8 @@ namespace nebrangu
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Weather> Weathers { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,8 +28,5 @@ namespace nebrangu
 
             // define any custom model configuration here, such as setting up relationships between entities
         }
-
-
-        public DbSet<nebrangu.Models.User> User { get; set; } = default!;
     }
 }
