@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using nebrangu;
 using nebrangu.Models;
 using nebrangu.Repositories;
+using Org.BouncyCastle.Asn1.Mozilla;
 
 namespace nebrangu.Controllers
 {
@@ -218,6 +219,19 @@ namespace nebrangu.Controllers
         public bool CheckDetails(Product product)
         {
             return product.Name == null ? true : false;
+        }
+
+        public int SaveCartProductCount(int id)
+        {
+            // todo: get count of the product in user's shopping basket and call 5 (increaseproductcountincookies)
+            
+            return IncreaseProductCountInCookies(id);
+        }
+
+        public int IncreaseProductCountInCookies(int id)
+        {
+            // todo: save new count into cookies, return new count
+            return 1;
         }
     }
 }
