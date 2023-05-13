@@ -21,9 +21,11 @@ namespace nebrangu.Models
         [Display(Name = "Kaina")]
         public decimal Price { get; set; }
 
+        [Display(Name = "Įvertinimas")]
         [Range(0.0, 5.0, ErrorMessage = "Įvertinimas privalo būti tarp 0.0 ir 5.0")]
         public double Rating { get; set; } = 0.0;
 
+        [Display(Name = "Įvertinimų kiekis")]
         public int RatingCount { get; set; } = 0;
 
         [Display(Name = "Kategorija")]
@@ -39,7 +41,7 @@ namespace nebrangu.Models
         public int? SeasonId { get; set; }
 
         [StringLength(255, ErrorMessage = "Šalies pavadinimas negali viršyti 255 raidžių")]
-        [Display(Name = "Kilmies šalis")]
+        [Display(Name = "Kilmės šalis")]
         public string OriginCountry { get; set; }
 
         [Display(Name = "Kategorija")]
