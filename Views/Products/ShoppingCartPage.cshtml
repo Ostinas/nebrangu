@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@model IEnumerable<nebrangu.Models.Product>
+
+@{
+    ViewData["Title"] = "Krepšelis";
+	
+    string cartCookieJson = ViewContext.HttpContext.Request.Cookies["cart"];
+    Dictionary<int, int> cart = !string.IsNullOrEmpty(cartCookieJson)
+        ? JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson)
+        : new Dictionary<int, int>();
+}
+
+<h1>Krepšelis</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+				Kiekis
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>
+                    <form method="post" action="@Url.Action("SaveCartProductCount", "Products")">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="number" min="1" name="newCount" value="@cart[item.Id]" />
+                        <button type="submit">Išsaugoti kiekį</button>
+                    </form>
+                </td>
+                <td>
+                    <a asp-action="DeleteProductFromCart" asp-route-id="@item.Id">Ištrinti</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

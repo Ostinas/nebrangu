@@ -23,6 +23,9 @@ namespace nebrangu
 
         public DbSet<Mood> Moods { get; set; }
 
+        public DbSet<Stock> Stocks { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
