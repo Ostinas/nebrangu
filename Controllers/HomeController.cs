@@ -15,8 +15,8 @@ namespace nebrangu.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "Products");
-            //return View();
+            //return RedirectToAction("Index", "Products");
+            return View();
         }
 
         public IActionResult Privacy()

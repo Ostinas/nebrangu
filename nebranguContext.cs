@@ -21,6 +21,7 @@ namespace nebrangu
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Mood> Moods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

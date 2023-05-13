@@ -14,11 +14,13 @@ namespace nebrangu.Controllers
     {
         private readonly nebranguContext _context;
         private UsersRepo _repo;
+        private EmotionsRepo _repoEmotions;
 
         public UsersController(nebranguContext context)
         {
             _context = context;
             _repo = new UsersRepo(_context);
+            _repoEmotions = new EmotionsRepo(_context);
         }
 
         // GET: Users
@@ -153,6 +155,21 @@ namespace nebrangu.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> EmotionSelection()
+        {
+            var emotions = await _repoEmotions.GetAll();
+            return View("EmotionSelectionPage", emotions);
+        }
+
+        public async Task<IActionResult> SelectEmotion(int emotion)
+        {
+            HttpContext.Response.Cookies.Append("Emotion", emotion.ToString(), new CookieOptions()
+            {
+                Expires = DateTime.Now.AddHours(24)
+            });
+            return RedirectToAction("Index", "Home");
         }
 
         private bool UserExists(int id)
