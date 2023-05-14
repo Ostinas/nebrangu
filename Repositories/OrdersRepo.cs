@@ -42,6 +42,47 @@ namespace nebrangu.Repositories
             await _context.SaveChangesAsync();
             return order;
         }
+        
+        public async Task<List<Order>> GetUserOrders(int userId)
+        {
+            return await _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Category)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Manufacturer)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Season)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Weather)
+                .Include(o => o.DeliveryType)
+                .Include(o => o.PaymentMethod)
+                .Where(o => o.User.Id == userId)
+                .ToListAsync();
+        }
+
+        public async Task<Order> GetOrderDetails(int orderId)
+        {
+            return await _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Category)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Manufacturer)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Season)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Weather)
+                .FirstOrDefaultAsync(o => o.Id == orderId);
+        }
 
         public async Task<Order> Update(Order order)
         {

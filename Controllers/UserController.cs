@@ -15,12 +15,14 @@ namespace nebrangu.Controllers
         private readonly nebranguContext _context;
         private UsersRepo _repo;
         private EmotionsRepo _repoEmotions;
+        private IHttpContextAccessor _httpContextAccessor;
 
-        public UserController(nebranguContext context)
+        public UserController(nebranguContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _repo = new UsersRepo(_context);
             _repoEmotions = new EmotionsRepo(_context);
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Users
@@ -170,6 +172,20 @@ namespace nebrangu.Controllers
                 Expires = DateTime.Now.AddHours(24)
             });
             return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> OpenProfilePage()
+        {
+            User user = await _repo.GetUserById(1);
+            return View("ProfilePage", user);
+        }
+
+        public async Task<IActionResult> OpenOrderHistory()
+        {
+            OrderController orderController = new OrderController(_context, _httpContextAccessor);
+
+            var orders = await orderController.GetOrderList(1);
+            return View("OrderHistoryPage", orders);
         }
 
         public bool UserExists(int id)
