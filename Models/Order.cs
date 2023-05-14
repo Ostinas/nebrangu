@@ -11,14 +11,14 @@ namespace nebrangu.Models
         [Display(Name = "Data")]
         public DateTime OrderDate { get; set; }
 
-        [Display(Name = "Suma")]
+        [Display(Name = "Mokėtina suma:")]
         public double Sum { get; set; }
 
         [Display(Name = "Klientas")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         [Display(Name = "Statusas")]
-        public Order_Status Status { get; set; }
+        public Order_Status? Status { get; set; }
 
         [Display(Name = "Adresas")]
         public string? DeliveryAddress { get; set; }
@@ -38,5 +38,8 @@ namespace nebrangu.Models
         public bool isPaid { get; set; }
 
         public List<Order_Product> OrderProducts { get; set; }
+
+        [NotMapped]
+        public string? PaymentDetails { get; set; }
     }
 }

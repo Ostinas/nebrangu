@@ -10,13 +10,20 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="CreateConfirmOrder">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderDate" value="@Model.OrderDate" />
+			
             <div class="form-group">
-                <label asp-for="Sum" class="control-label"></label>
-                <input asp-for="Sum" class="form-control" readonly/>
-                <span asp-validation-for="Sum" class="text-danger"></span>
+                <label asp-for="DeliveryType.Name" class="control-label"></label>
+                @Html.DropDownListFor(model => model.DeliveryType.Id, new SelectList(new List<Delivery_Type>
+                {
+                new Delivery_Type { Id = 1, Name = "Kurjeris" },
+                new Delivery_Type { Id = 2, Name = "Parduotuvė" }
+                }, "Id", "Name"), "Pasirinkite pristatymo būdą", new { @class = "form-control" })
             </div>
+            <br />
+            <label class="control-label">Įveskite namų arba parduotuvės adresą:</label>
             <div class="form-group">
                 <label asp-for="DeliveryAddress" class="control-label"></label>
                 <input asp-for="DeliveryAddress" class="form-control" />
@@ -32,14 +39,7 @@
                 <input asp-for="DeliveryPostalCode" class="form-control" />
                 <span asp-validation-for="DeliveryPostalCode" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DeliveryType.Id" class="control-label"></label>
-                @Html.DropDownListFor(model => model.DeliveryType.Id, new SelectList(new List<Delivery_Type>
-                {
-                new Delivery_Type { Id = 0, Name = "Kurjeris" },
-                new Delivery_Type { Id = 1, Name = "Parduotuvė" }
-                }, "Id", "Name"), "Pasirinkite pristatymo būdą", new { @class = "form-control" })
-            </div>
+            <br />
             <div class="form-group">
                 <label class="control-label">Užsakymo produktai:</label>
                 <table class="table">
@@ -50,6 +50,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @for (int i = 0; i < Model.OrderProducts.Count; i++)
+                        {
+                            <input type="hidden" name="OrderProducts[@i].Id" value="@Model.OrderProducts[i].Id" />
+                            <input type="hidden" name="OrderProducts[@i].Product.Id" value="@Model.OrderProducts[i].Product.Id" />
+                            <input type="hidden" name="OrderProducts[@i].Product.Name" value="@Model.OrderProducts[i].Product.Name" />
+                            <input type="hidden" name="OrderProducts[@i].Product.Price" value="@Model.OrderProducts[i].Product.Price" />
+                        }
+
                         @foreach (var item in Model.OrderProducts)
                         {
                             <tr>
@@ -60,8 +68,24 @@
                     </tbody>
                 </table>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="PaymentMethod.Name" class="control-label"></label>
+                @Html.DropDownListFor(model => model.PaymentMethod.Id, new SelectList(new List<Payment_Method>
+                {
+                new Payment_Method { Id = 1, Name = "Bankinis pavedimas" },
+                new Payment_Method { Id = 2, Name = "Grynais" }
+                }, "Id", "Name"), "Pasirinkite apmokėjimo būdą", new { @class = "form-control" })
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Sum" class="control-label"></label>
+                <span asp-for="Sum" class="form-control" readonly>@Model.Sum</span>
+                <input type="hidden" asp-for="Sum" value="@Model.Sum" />
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Patvirtinti užsakymą" class="btn btn-primary" />
             </div>
         </form>
     </div>

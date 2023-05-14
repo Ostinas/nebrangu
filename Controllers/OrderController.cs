@@ -1,17 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using nebrangu.Models;
+using nebrangu.Repositories;
 
 namespace nebrangu.Controllers
 {
     public class OrderController : Controller
     {
         private readonly nebranguContext _context;
+        private OrdersRepo _repo;
         private IHttpContextAccessor _httpContextAccessor;
 
         public OrderController(nebranguContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _repo = new OrdersRepo(context);
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -23,128 +26,19 @@ namespace nebrangu.Controllers
                         Problem("Entity set 'nebranguContext.Order'  is null.");
         }
 
-        // GET: Order/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Order == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.Order
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return View(order);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveChanges([Bind("Id,OrderDate,Sum,DeliveryAddress,DeliveryCity,DeliveryPostalCode,isPaid")] Order order)
+        public async Task<IActionResult> CreateConfirmOrder([Bind("OrderDate, Sum, User, Status, isPaid, DeliveryType, DeliveryAddress, DeliveryCity, DeliveryPostalCode, PaymentMethod, OrderProducts")] Order order)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(order);
-        }
+            order.OrderProducts.ForEach(orderProduct => orderProduct.Product = _context.Products.Find(orderProduct.Product.Id));
+            order.OrderProducts.ForEach(product => product.Order = order);
+            order.DeliveryType = _context.Delivery_Types.Find(order.DeliveryType.Id);
+            order.PaymentMethod = _context.Payment_Methods.Find(order.PaymentMethod.Id);
+            order.Status = _context.Order_Statuses.Find(1);
+            order.User = _context.Users.Find(1);
 
-        // GET: Order/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Order == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.Order.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-            return View(order);
-        }
-
-        // POST: Order/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,Sum,DeliveryAddress,DeliveryCity,DeliveryPostalCode,isPaid")] Order order)
-        {
-            if (id != order.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderExists(order.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(order);
-        }
-
-        // GET: Order/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Order == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.Order
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return View(order);
-        }
-
-        // POST: Order/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Order == null)
-            {
-                return Problem("Entity set 'nebranguContext.Order'  is null.");
-            }
-            var order = await _context.Order.FindAsync(id);
-            if (order != null)
-            {
-                _context.Order.Remove(order);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool OrderExists(int id)
-        {
-            return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
+            await _repo.Create(order);
+            return View("OrderInformationPage", order);
         }
 
         public IActionResult Create()
@@ -165,7 +59,6 @@ namespace nebrangu.Controllers
 
             List<Order_Product> orderProducts = cartProductPrices.Keys.Select(productId => new Order_Product
             {
-                Id = productId,
                 Product = _context.Products.Find(productId),
                 Order = order
             }).ToList();
@@ -177,6 +70,18 @@ namespace nebrangu.Controllers
         public decimal CalculateOrderSum(Dictionary<int, decimal> cartProductPrices)
         {
             return cartProductPrices.Values.Sum();
+        }
+
+        public IActionResult GetPaymentDetails(int orderId)
+        {
+            int paymentMethod = _repo.GetPaymentMethod(orderId);
+            
+            if (paymentMethod == 1)
+            {
+                string sellerBankAccount = new UserController(_context).GetSellerBankAccount(1);
+                return Content("Atlikite bankinį pavedimą į šią sąskaitą: " + sellerBankAccount);
+            }
+            return Content("Apmokėjimas atsiemimo metu.");
         }
     }
 }
