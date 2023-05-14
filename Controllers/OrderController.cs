@@ -22,7 +22,7 @@ namespace nebrangu.Controllers
         public async Task<IActionResult> Index()
         {
             return _context.Order != null ?
-                        View("OrderHistoryPage", await _context.Order.ToListAsync()) :
+                        View(await _context.Order.ToListAsync()) :
                         Problem("Entity set 'nebranguContext.Order'  is null.");
         }
 
@@ -82,22 +82,6 @@ namespace nebrangu.Controllers
                 return Content("Atlikite bankinį pavedimą į šią sąskaitą: " + sellerBankAccount);
             }
             return Content("Apmokėjimas atsiemimo metu.");
-        }
-
-        public async Task<IActionResult> OpenOrder(int? id)
-        {
-            if (id == null || _context.Order == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _repo.GetById((int)id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return View("OrderInformationPage", order);
         }
     }
 }
