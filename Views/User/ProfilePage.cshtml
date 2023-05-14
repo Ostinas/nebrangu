@@ -1,0 +1,36 @@
+﻿@model nebrangu.Models.User
+
+@{
+    ViewData["Title"] = "Naudotojo profilis";
+}
+
+<h1>Profilis</h1>
+
+<div>
+    <h4>Naudotojas</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="OpenOrderHistory">Užsakymų istorija</a>
+    <a asp-action="Index">Grįžti atgal</a>
+</div>

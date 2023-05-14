@@ -35,6 +35,11 @@ namespace nebrangu.Repositories
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
+        public async Task<User> GetUserById(int id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
         public async Task<User> Create(User user)
         {
             _context.Users.Add(user);

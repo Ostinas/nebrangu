@@ -78,10 +78,22 @@ namespace nebrangu.Controllers
             
             if (paymentMethod == 1)
             {
-                string sellerBankAccount = new UserController(_context).GetSellerBankAccount(1);
+                string sellerBankAccount = new UserController(_context, _httpContextAccessor).GetSellerBankAccount(1);
                 return Content("Atlikite bankinį pavedimą į šią sąskaitą: " + sellerBankAccount);
             }
             return Content("Apmokėjimas atsiemimo metu.");
+        }
+
+        public async Task<List<Order>> GetOrderList(int userId)
+        {
+            var orderList = await _repo.GetUserOrders(userId);
+            return orderList;
+        }
+
+        public async Task<IActionResult> OpenOrder(int orderId)
+        {
+            var order = await _repo.GetOrderDetails(orderId);
+            return View("OrderInformationPage", order);
         }
     }
 }
