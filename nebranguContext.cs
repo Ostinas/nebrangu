@@ -41,8 +41,5 @@ namespace nebrangu
 
 
         public DbSet<nebrangu.Models.Order> Order { get; set; } = default!;
-
-
-        public DbSet<nebrangu.Models.Order_Product> Order_Product { get; set; } = default!;
     }
 }

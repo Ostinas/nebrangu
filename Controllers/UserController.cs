@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using nebrangu.Models;
 using nebrangu.Repositories;
-using Newtonsoft.Json;
 
 namespace nebrangu.Controllers
 {
@@ -181,19 +180,6 @@ namespace nebrangu.Controllers
         public string GetSellerBankAccount(int userId)
         {
             return _repo.GetBankAccount(userId);
-        }
-
-        public async Task<IActionResult> Profilis()
-        {
-            //string cartCookieJson = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
-
-            //Dictionary<int, int> cart = !string.IsNullOrEmpty(cartCookieJson) ? JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson) : new Dictionary<int, int>();
-
-            //var products = from p in _context.Products
-                          // where cart.Keys.Contains(p.Id)
-                          // select p;
-
-            return View("ProfilePage");
-        }
+        } 
     }
 }
