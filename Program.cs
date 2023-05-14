@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
+using nebrangu.Controllers;
 
 namespace nebrangu
 {
@@ -21,7 +22,8 @@ namespace nebrangu
             connection.Open();
             builder.Services.AddDbContext<nebranguContext>(options =>
                 options.UseMySQL(builder.Configuration.GetConnectionString("MySqlConnection") ?? throw new InvalidOperationException("Connection string 'nebranguContext' not found.")));
-
+            builder.Services.AddHttpContextAccessor();
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

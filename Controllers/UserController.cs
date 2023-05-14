@@ -10,13 +10,13 @@ using nebrangu.Repositories;
 
 namespace nebrangu.Controllers
 {
-    public class UsersController : Controller
+    public class UserController : Controller
     {
         private readonly nebranguContext _context;
         private UsersRepo _repo;
         private EmotionsRepo _repoEmotions;
 
-        public UsersController(nebranguContext context)
+        public UserController(nebranguContext context)
         {
             _context = context;
             _repo = new UsersRepo(_context);
@@ -172,9 +172,14 @@ namespace nebrangu.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private bool UserExists(int id)
+        public bool UserExists(int id)
         {
             return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        public string GetSellerBankAccount(int userId)
+        {
+            return _repo.GetBankAccount(userId);
+        } 
     }
 }

@@ -25,6 +25,12 @@ namespace nebrangu
 
         public DbSet<Stock> Stocks { get; set; }
 
+        public DbSet<Order_Status> Order_Statuses { get; set; }
+        public DbSet<Delivery_Type> Delivery_Types { get; set; }
+        public DbSet<Payment_Method> Payment_Methods { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,5 +38,8 @@ namespace nebrangu
 
             // define any custom model configuration here, such as setting up relationships between entities
         }
+
+
+        public DbSet<nebrangu.Models.Order> Order { get; set; } = default!;
     }
 }

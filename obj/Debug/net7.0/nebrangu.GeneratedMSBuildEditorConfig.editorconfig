@@ -28,32 +28,44 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Products/CreateConfirm.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcQ3JlYXRlQ29uZmlybS5jc2h0bWw=
+[C:/Users/zilvi/Desktop/nebrangu/Views/Order/OrderCreatePage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJDcmVhdGVQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Products/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRGVsZXRlLmNzaHRtbA==
+[C:/Users/zilvi/Desktop/nebrangu/Views/Order/OrderInformationPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJJbmZvcm1hdGlvblBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Products/ProductCreationPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcUHJvZHVjdENyZWF0aW9uUGFnZS5jc2h0bWw=
+[C:/Users/zilvi/Desktop/nebrangu/Views/Product/CreateConfirm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxDcmVhdGVDb25maXJtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Products/ProductDeletionPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcUHJvZHVjdERlbGV0aW9uUGFnZS5jc2h0bWw=
+[C:/Users/zilvi/Desktop/nebrangu/Views/Product/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Products/ProductDetailsPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcUHJvZHVjdERldGFpbHNQYWdlLmNzaHRtbA==
+[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductCreationPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0Q3JlYXRpb25QYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Products/ProductEditPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcUHJvZHVjdEVkaXRQYWdlLmNzaHRtbA==
+[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductDeletionPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RGVsZXRpb25QYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Products/ProductPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcUHJvZHVjdFBhZ2UuY3NodG1s
+[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductDetailsPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RGV0YWlsc1BhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductEditPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RWRpdFBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0UGFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ShoppingCartPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxTaG9wcGluZ0NhcnRQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zilvi/Desktop/nebrangu/Views/Shared/Error.cshtml]
@@ -64,20 +76,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Users/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/zilvi/Desktop/nebrangu/Views/Users/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/zilvi/Desktop/nebrangu/Views/Users/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zilvi/Desktop/nebrangu/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zilvi/Desktop/nebrangu/Views/Users/EmotionSelectionPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRW1vdGlvblNlbGVjdGlvblBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zilvi/Desktop/nebrangu/Views/Users/UserListPage.cshtml]

@@ -48,5 +48,17 @@ namespace nebrangu.Repositories
             await _context.SaveChangesAsync();
             return product;
         }
+
+        public Dictionary<int, decimal> GetProductPrices(Dictionary<int, int> cart)
+        {
+            Dictionary<int, decimal> prices = new Dictionary<int, decimal>();
+
+            var products = from p in _context.Products
+                           where cart.Keys.Contains(p.Id)
+                           select p;
+
+            products.ToList().ForEach(p => prices.Add(p.Id, p.Price * cart[p.Id]));
+            return prices;
+        }
     }
 }

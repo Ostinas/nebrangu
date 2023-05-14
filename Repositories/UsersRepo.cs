@@ -56,5 +56,10 @@ namespace nebrangu.Repositories
             await _context.SaveChangesAsync();
             return user;
         }
+
+        public string GetBankAccount(int userId)
+        {
+            return _context.Users.FirstOrDefault(u => u.Id == userId).BankAccount;
+        }
     }
 }

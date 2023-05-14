@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using nebrangu;
 using nebrangu.Models;
 using nebrangu.Repositories;
 using Newtonsoft.Json;
-using Org.BouncyCastle.Asn1.Mozilla;
 
 namespace nebrangu.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductController : Controller
     {
         private readonly nebranguContext _context;
         private ProductsRepo _repo;
+        private IHttpContextAccessor _httpContextAccessor;
 
-        public ProductsController(nebranguContext context)
+        public ProductController(nebranguContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _repo = new ProductsRepo(_context);
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Products
@@ -234,7 +229,7 @@ namespace nebrangu.Controllers
             }
             else
             {
-                string cartCookieJson = HttpContext.Request.Cookies["cart"];
+                string cartCookieJson = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
                 Dictionary<int, int> cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson);
 
                 ChangeProductCountInCookies(id, cart[id] + 1);
@@ -245,7 +240,7 @@ namespace nebrangu.Controllers
 
         public bool CheckIfProductIsInCart(int id)
         {
-            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+            string cartCookieJson = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
             Dictionary<int, int> cart = !string.IsNullOrEmpty(cartCookieJson) ? JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson) : new Dictionary<int, int>();
 
             return cart.ContainsKey(id) && cart[id] >= 0;
@@ -253,19 +248,19 @@ namespace nebrangu.Controllers
 
         public bool SaveToCookies(int id)
         {
-            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+            string cartCookieJson = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
             Dictionary<int, int> cart = !string.IsNullOrEmpty(cartCookieJson) ? JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson) : new Dictionary<int, int>();
 
             cart.Add(id, 1);
             string cartCookieJsonNew = JsonConvert.SerializeObject(cart);
-            HttpContext.Response.Cookies.Append("cart", cartCookieJsonNew);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("cart", cartCookieJsonNew);
             
             return true;
         }
 
         public async Task<IActionResult> Krepselis()
         {
-            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+            string cartCookieJson = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
 
             Dictionary<int, int> cart = !string.IsNullOrEmpty(cartCookieJson) ? JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson) : new Dictionary<int, int>();
 
@@ -282,7 +277,7 @@ namespace nebrangu.Controllers
             int productStockCount = stocks.GetProductStock(id);
 
             // Get product count from cookies
-            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+            string cartCookieJson = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
             Dictionary<int, int> cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson);
 
             if (productStockCount >= newCount)
@@ -295,12 +290,12 @@ namespace nebrangu.Controllers
 
         public int ChangeProductCountInCookies(int id, int newCount)
         {
-            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+            string cartCookieJson = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
             Dictionary<int, int> cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson);
             cart[id] = newCount;
             
             string cartCookieJsonNew = JsonConvert.SerializeObject(cart);
-            HttpContext.Response.Cookies.Append("cart", cartCookieJsonNew);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("cart", cartCookieJsonNew);
 
             return newCount;
         }
@@ -313,13 +308,22 @@ namespace nebrangu.Controllers
 
         public IResponseCookies RemoveProductFromCookies(int id)
         {
-            string cartCookieJson = HttpContext.Request.Cookies["cart"];
+            string cartCookieJson = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
             Dictionary<int, int> cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson);
             cart.Remove(id);
 
             string cartCookieJsonNew = JsonConvert.SerializeObject(cart);
-            HttpContext.Response.Cookies.Append("cart", cartCookieJsonNew);
-            return HttpContext.Response.Cookies;
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("cart", cartCookieJsonNew);
+            return _httpContextAccessor.HttpContext.Response.Cookies;
+        }
+        
+        public Dictionary<int, decimal> GetCartPrices()
+        {
+            string cartCookieJson = _httpContextAccessor.HttpContext.Request.Cookies["cart"];
+            Dictionary<int, int> cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(cartCookieJson);
+            
+            Dictionary<int, decimal> productPrices = _repo.GetProductPrices(cart);
+            return productPrices;
         }
     }
 }
