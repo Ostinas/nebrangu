@@ -35,7 +35,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>
                 <td>
-                    <form method="post" action="@Url.Action("SaveCartProductCount", "Products")">
+                    <form method="post" action="@Url.Action("SaveCartProductCount", "Product")">
                         <input type="hidden" name="id" value="@item.Id" />
                         <input type="number" min="1" name="newCount" value="@cart[item.Id]" />
                         <button type="submit">Išsaugoti kiekį</button>
@@ -48,3 +48,6 @@
         }
     </tbody>
 </table>
+
+
+<a asp-controller="Order" asp-action="Create">Sukurti užsakymą</a>

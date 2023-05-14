@@ -1,0 +1,72 @@
+﻿@model nebrangu.Models.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Sum" class="control-label"></label>
+                <input asp-for="Sum" class="form-control" readonly/>
+                <span asp-validation-for="Sum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryAddress" class="control-label"></label>
+                <input asp-for="DeliveryAddress" class="form-control" />
+                <span asp-validation-for="DeliveryAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryCity" class="control-label"></label>
+                <input asp-for="DeliveryCity" class="form-control" />
+                <span asp-validation-for="DeliveryCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryPostalCode" class="control-label"></label>
+                <input asp-for="DeliveryPostalCode" class="form-control" />
+                <span asp-validation-for="DeliveryPostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryType.Id" class="control-label"></label>
+                @Html.DropDownListFor(model => model.DeliveryType.Id, new SelectList(new List<Delivery_Type>
+                {
+                new Delivery_Type { Id = 0, Name = "Kurjeris" },
+                new Delivery_Type { Id = 1, Name = "Parduotuvė" }
+                }, "Id", "Name"), "Pasirinkite pristatymo būdą", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label class="control-label">Užsakymo produktai:</label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Pavadinimas</th>
+                            <th>Kaina</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderProducts)
+                        {
+                            <tr>
+                                <td>@item.Product.Name</td>
+                                <td>@item.Product.Price</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
