@@ -1,0 +1,32 @@
+﻿@model IEnumerable<nebrangu.Models.Order>
+
+@{
+    ViewData["Title"] = "OrderHistoryPage";
+}
+
+<h1>Užsakymų Istorija</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    <h4>Užsakymas #@item.Id</h4>
+            </td>
+                <td>
+                    <h4>@item.OrderDate</h4>
+                </td>
+            <td>
+                  
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="OpenOrder" asp-route-id="@item.Id">Perziureti</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
