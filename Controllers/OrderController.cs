@@ -67,6 +67,54 @@ namespace nebrangu.Controllers
             return View("OrderCreatePage", order);
         }
 
+        public async Task<List<int>> CheckOrderHistory()
+        {
+            List<Order> orders = await _repo.GetAll();
+            int category = new int();
+
+            if (orders == null)
+            {
+                //Get Every users categories..
+            }
+            else
+            {
+                category = GetMostLikedCategory(orders);
+            }
+
+            List<int> categories = new List<int>();
+            categories.Add(category);
+
+            return categories;
+
+        }
+
+        private int GetMostLikedCategory(List<Order> orders)
+        {
+            List<int> usedCategories = new List<int>();
+
+            foreach (var order in orders)
+            {
+                if(order.OrderProducts != null)
+                    foreach (var item in order.OrderProducts)
+                    {
+                        if (item.Product.CategoryId != null)
+                        {
+                            usedCategories.Add(item.Product.CategoryId);
+                        }
+                    }
+            }
+
+            if (usedCategories.Count == 0)
+                return 1;
+
+            int mostFrequent = usedCategories.GroupBy(s => s)
+                .OrderByDescending(g => g.Count())
+                .Select(g => g.Key)
+                .First();
+
+            return mostFrequent;
+        }
+
         public decimal CalculateOrderSum(Dictionary<int, decimal> cartProductPrices)
         {
             return cartProductPrices.Values.Sum();

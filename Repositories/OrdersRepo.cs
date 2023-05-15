@@ -14,7 +14,23 @@ namespace nebrangu.Repositories
 
         public async Task<List<Order>> GetAll()
         {
-            return await _context.Orders.ToListAsync();
+            return await _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Category)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Manufacturer)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Season)
+                .Include(o => o.OrderProducts)
+                    .ThenInclude(op => op.Product)
+                        .ThenInclude(p => p.Weather)
+                .Include(o => o.DeliveryType)
+                .Include(o => o.PaymentMethod)
+                .ToListAsync();
         }
 
         public async Task<Order> GetById(int id)

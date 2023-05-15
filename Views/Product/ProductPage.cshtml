@@ -1,4 +1,4 @@
-﻿@model IEnumerable<nebrangu.Models.Product>
+﻿@model nebrangu.Models.ProductViewModel
 
 @{
     ViewData["Title"] = "Prekių katalogas";
@@ -13,40 +13,40 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Products[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Products[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Products[0].Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rating)
+                @Html.DisplayNameFor(model => model.Products[0].Rating)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RatingCount)
+                @Html.DisplayNameFor(model => model.Products[0].RatingCount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OriginCountry)
+                @Html.DisplayNameFor(model => model.Products[0].OriginCountry)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                @Html.DisplayNameFor(model => model.Products[0].Category)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
+                @Html.DisplayNameFor(model => model.Products[0].Manufacturer)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Weather)
+                @Html.DisplayNameFor(model => model.Products[0].Weather.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Season)
+                @Html.DisplayNameFor(model => model.Products[0].Season.Name)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Products) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -73,10 +73,10 @@
 				Samsung
             </td>
 			<td>
-				Visi
+                    @Html.DisplayFor(modelItem => item.Weather.Name)
             </td>
             <td>
-				Visi
+                    @Html.DisplayFor(modelItem => item.Season.Name)
             </td>
             <td>
 				<a asp-action="AddProductToCart" asp-route-id="@item.Id">Pridėti į krepšelį</a>
@@ -89,5 +89,91 @@
             </td>
         </tr>
 }
+    </tbody>
+</table>
+
+<h1>Rekomenduojamos prekės</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].RatingCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].OriginCountry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].Weather)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedProducts[0].Season)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RecommendedProducts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RatingCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OriginCountry)
+                </td>
+                <td>
+                    Mobilusis telefonas
+                </td>
+                <td>
+                    Samsung
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weather.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Season.Name)
+                </td>
+                <td>
+                    <a asp-action="AddProductToCart" asp-route-id="@item.Id">Pridėti į krepšelį</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Peržiūrėti</a>
+                </td>
+                <td>
+                    <a asp-action="DeletePage" asp-route-id="@item.Id">Ištrinti</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
