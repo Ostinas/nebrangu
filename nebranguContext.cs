@@ -42,5 +42,8 @@ namespace nebrangu
 
 
         public DbSet<nebrangu.Models.Order> Order { get; set; } = default!;
+
+
+        public DbSet<nebrangu.Models.Dispute> Dispute { get; set; } = default!;
     }
 }
