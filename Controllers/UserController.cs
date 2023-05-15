@@ -17,6 +17,8 @@ namespace nebrangu.Controllers
         private readonly nebranguContext _context;
         private UsersRepo _repo;
         private EmotionsRepo _repoEmotions;
+        private DisputesRepo _disputesRepo;
+        private OrdersRepo _ordersRepo;
         private IHttpContextAccessor _httpContextAccessor;
 
         public UserController(nebranguContext context, IHttpContextAccessor httpContextAccessor)
@@ -24,12 +26,16 @@ namespace nebrangu.Controllers
             _context = context;
             _repo = new UsersRepo(_context);
             _repoEmotions = new EmotionsRepo(_context);
+            _ordersRepo = new OrdersRepo(_context);
             _httpContextAccessor = httpContextAccessor;
+            _disputesRepo = new DisputesRepo(_context);
         }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
+            var contr = new DisputeController(_context, _httpContextAccessor, _disputesRepo, _repo);
+            var result = await contr.TrustCalculation(2);
             var users = await _repo.GetAll();
             return View("UserListPage", users);
         }
@@ -376,5 +382,25 @@ namespace nebrangu.Controllers
             }
 
         }
+
+        public async Task<double> RequestTrustability(int userId)
+        {
+           var user = await _repo.GetUserById(userId);
+           return user.Trustability;
+        }
+
+        public async Task<int> GetOrderCount(int userId)
+        {
+            var orderList = await _ordersRepo.GetUserOrders(userId);
+            int orderCount = orderList.Count;
+            return orderCount;
+        }
+
+        public async Task<User> GetUserInfo(int userId)
+        {
+            var user = await _repo.GetUserById(userId);
+            return user;
+        }
+
     }
 }

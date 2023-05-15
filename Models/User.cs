@@ -62,5 +62,11 @@ namespace nebrangu.Models
         [StringLength(255, MinimumLength = 0, ErrorMessage = "Banko sąskaita negali viršyti 255 simbolių.")]
         [DisplayName("Banko sąskaita")]
         public string? BankAccount { get; set; }
+
+        [DisplayName("Kompanijos pajamos")]
+        public double? CompanyIncome { get; set; }
+
+        [DisplayName ("Naudotojo registracijos data")]
+        public DateTime RegistrationDate { get; set; }
     }
 }

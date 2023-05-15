@@ -20,18 +20,6 @@ namespace nebrangu.Repositories
         public async Task<User> GetById(int id)
         {
             return await _context.Users
-                .Include(u => u.Name)
-                .Include(u => u.Surname)
-                .Include(u => u.Email)
-                .Include(u => u.Level)
-                .Include(u => u.Trustability)
-                .Include(u => u.Rating)
-                .Include(u => u.Phone)
-                .Include(u => u.Address)
-                .Include(u => u.City)
-                .Include(u => u.PostalCode)
-                .Include(u => u.CompanyCode)
-                .Include(u => u.BankAccount)
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
