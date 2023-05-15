@@ -16,6 +16,7 @@ namespace nebrangu.Repositories
         {
             return await _context.Orders
                 .Include(o => o.User)
+                .Include(o => o.Status)
                 .Include(o => o.OrderProducts)
                     .ThenInclude(op => op.Product)
                         .ThenInclude(p => p.Category)
