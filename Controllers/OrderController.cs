@@ -143,5 +143,85 @@ namespace nebrangu.Controllers
             var order = await _repo.GetOrderDetails(orderId);
             return View("OrderInformationPage", order);
         }
+
+        public async Task<IActionResult> OpenOrderStatistics()
+        {
+            var orders = await _repo.GetAll();
+            int doneOrderCount = await CalculateDoneOrderCount();
+            int lostDisputeCount = await CalculateLostDisputes();
+            double sum = await CalculateOrderSum();
+            int activeDiscounts = CalculateActiveDiscounts();
+            List<Order> orderList = await CreateNotSentOrderList();
+
+
+            OrderStatisticsViewModel viewModel = new OrderStatisticsViewModel()
+            {
+                DoneOrderCount = doneOrderCount,
+                LostDisputesCount = lostDisputeCount,
+                OrderSum = sum,
+                ActiveDiscounts = activeDiscounts,
+                NotSentOrders = orderList
+            };
+            return View("OrderStatisticsPage", viewModel);
+        }
+
+        public async Task<int> CalculateDoneOrderCount()
+        {
+            int count = 0;
+            var orders = await _repo.GetAll();
+
+            foreach (var order in orders)
+            {
+                if (order.Status.Name == "Pristatyta")
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public async Task<int> CalculateLostDisputes()
+        {
+            int count = 0;
+
+            //MANTAS SITA RELIZUOS SAKE
+            return count;
+        }
+
+        public async Task<double> CalculateOrderSum()
+        {
+            double sum = 0;
+            var orders = await _repo.GetAll();
+
+            foreach(var order in orders)
+            {
+                sum += order.Sum;
+            }
+
+            return sum;
+        }
+
+        public int CalculateActiveDiscounts()
+        {
+            return 0;
+        }
+
+        public async Task<List<Order>> CreateNotSentOrderList()
+        {
+            List<Order> orderList = new List<Order>();
+
+            var orders = await _repo.GetAll();
+
+            foreach( var order in orders)
+            {
+                if(order.Status.Name == "Sukurta" || order.Status.Name == "Laukiama apmokėjimo" || order.Status.Name == "Apmokėta" || order.Status.Name == "Ruošiama")
+                {
+                    orderList.Add(order);
+                }
+            }
+
+            return orderList;
+        }
     }
 }
