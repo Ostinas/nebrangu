@@ -24,7 +24,76 @@ namespace nebrangu.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _repo.GetAll();
-            return View("ProductPage", products);
+            var userController = new UserController(_context,_httpContextAccessor);
+            ProductViewModel viewModel = new ProductViewModel();
+
+            var sortedProducts = products.OrderBy(p=>p.Name).ToList();
+
+            if (userController != null)
+            {
+                List<Product> recommendedProducts = await userController.CalculateEmotionCoefficientAsync();
+
+                viewModel = new ProductViewModel
+                {
+                    Products = sortedProducts,
+                    RecommendedProducts = recommendedProducts
+                };
+            }
+
+
+
+            return View("ProductPage", viewModel);
+        }
+
+        public async Task<List<Product>> GetAllProducts()
+        {
+            var products = await _repo.GetAll();
+            return products;
+        }
+
+        public List<Product> FilterBySeasonAndWeather(List<int> category, List<string> sAw, List<Product> Products, double emotionCoefficient)
+        {
+
+            // Define a weight for each sorting variable
+            const double CATEGORY_WEIGHT = 0.2;
+            const double SEASON_WEIGHT = 0.4;
+            const double WEATHER_WEIGHT = 0.4;
+
+            // Define a dictionary to map each product to a score based on the sorting variables
+            Dictionary<Product, double> productScores = new Dictionary<Product, double>();
+
+            foreach (Product product in Products)
+            {
+                double score = 0;
+
+                if (product != null)
+                {
+                    // Calculate the score for the category variable
+                    if (product.CategoryId == category[0])
+                    {
+                        score += CATEGORY_WEIGHT;
+                    }
+
+                    // Calculate the score for the season variable
+                    if (product.Season.Name == sAw[0])
+                    {
+                        score += SEASON_WEIGHT;
+                    }
+
+                    // Calculate the score for the weather variable
+                    if (product.Weather.Name == sAw[1])
+                    {
+                        score += WEATHER_WEIGHT;
+                    }
+
+                    productScores[product] = score;
+                }
+            }
+
+            // Sort the products by their scores
+            List<Product> sortedProducts = productScores.OrderByDescending(x => x.Value * emotionCoefficient).Select(x => x.Key).ToList();
+
+            return sortedProducts;
         }
 
         // GET: Products/Details/5

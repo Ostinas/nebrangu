@@ -14,7 +14,12 @@ namespace nebrangu.Repositories
 
         public async Task<List<Product>> GetAll()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Manufacturer)
+                .Include(p => p.Season)
+                .Include(p => p.Weather)
+                .ToListAsync();
         }
 
         public async Task<Product> GetById(int id)

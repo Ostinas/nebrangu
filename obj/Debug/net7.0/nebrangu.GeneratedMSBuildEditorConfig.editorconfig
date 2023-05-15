@@ -9,97 +9,105 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = nebrangu
 build_property.RootNamespace = nebrangu
-build_property.ProjectDir = C:\Users\zilvi\Desktop\nebrangu\
+build_property.ProjectDir = C:\Users\tjutk\Documents\GitHub\nebrangu\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\zilvi\Desktop\nebrangu
+build_property.MSBuildProjectDirectory = C:\Users\tjutk\Documents\GitHub\nebrangu
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Pages/_ValidationScriptsPartial.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Home/Index.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Home/Privacy.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Order/OrderCreatePage.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Order/OrderCreatePage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJDcmVhdGVQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Order/OrderInformationPage.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Order/OrderInformationPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJJbmZvcm1hdGlvblBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Product/CreateConfirm.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Product/CreateConfirm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxDcmVhdGVDb25maXJtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Product/Delete.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Product/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductCreationPage.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Product/ProductCreationPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0Q3JlYXRpb25QYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductDeletionPage.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Product/ProductDeletionPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RGVsZXRpb25QYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductDetailsPage.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Product/ProductDetailsPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RGV0YWlsc1BhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductEditPage.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Product/ProductEditPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RWRpdFBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ProductPage.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Product/ProductPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0UGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Product/ShoppingCartPage.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Product/ShoppingCartPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxTaG9wcGluZ0NhcnRQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Shared/Error.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Users/Details.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Users/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Users/Edit.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Users/EmotionSelectionPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRW1vdGlvblNlbGVjdGlvblBhZ2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/zilvi/Desktop/nebrangu/Views/Users/UserListPage.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Users/UserListPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcVXNlckxpc3RQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/_ViewImports.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/User/EmotionSelectionPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFbW90aW9uU2VsZWN0aW9uUGFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/User/OrderHistoryPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxPcmRlckhpc3RvcnlQYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/User/ProfilePage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQcm9maWxlUGFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/_ViewStart.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/zilvi/Desktop/nebrangu/Views/Shared/_Layout.cshtml]
+[C:/Users/tjutk/Documents/GitHub/nebrangu/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-8136r178z8

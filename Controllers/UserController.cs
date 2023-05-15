@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using nebrangu.Models;
 using nebrangu.Repositories;
+using Newtonsoft.Json.Linq;
 
 namespace nebrangu.Controllers
 {
@@ -196,6 +198,183 @@ namespace nebrangu.Controllers
         public string GetSellerBankAccount(int userId)
         {
             return _repo.GetBankAccount(userId);
-        } 
+        }
+
+        public async Task<List<Product>> CalculateEmotionCoefficientAsync()
+        {
+            List<Product> RecommendedProducts = new List<Product>();
+
+            
+            double emotionCoefficient = 0;
+
+            string emotion = _httpContextAccessor.HttpContext.Request.Cookies["Emotion"];
+
+            if (emotion == null)
+            {
+                emotion = "3";
+            }
+            else
+            {
+
+                if (emotion == "1")
+                    emotionCoefficient = 1.5;
+                else if (emotion == "2")
+                    emotionCoefficient = 1.2;
+                else if (emotion == "3")
+                    emotionCoefficient = 1;
+                else if (emotion == "4")
+                    emotionCoefficient = 0.8;
+                else if (emotion == "5")
+                    emotionCoefficient = 0.5;
+            }
+
+
+            var orderController = new OrderController(_context, _httpContextAccessor);
+            var productController = new ProductController(_context, _httpContextAccessor);
+
+            if (orderController != null && productController != null)
+            {
+
+                List<int> category = await orderController.CheckOrderHistory();
+
+                List<string> SeasonAndWeather = await GetWeatherData();
+
+                List<Product> Products = await productController.GetAllProducts();
+
+                RecommendedProducts = productController.FilterBySeasonAndWeather(category, SeasonAndWeather, Products, emotionCoefficient);
+            }
+
+
+            return RecommendedProducts;
+
+        }
+
+
+
+
+        private async Task<List<string>> GetWeatherData()
+        {
+            List<string> list = new List<string>();
+            HttpClient client = new HttpClient();
+            string url = "https://api.meteo.lt/v1/stations/vilniaus-ams/observations/latest";
+
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response != null && response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                JObject json = JObject.Parse(content);
+
+                var observations = json["observations"][0];
+
+                string season = GetSeason(observations["observationTimeUtc"].Value<string>());
+                string weather = GetWeather(observations["conditionCode"].Value<string>());
+
+                list.Add(season);
+                list.Add(weather);
+
+                return list;
+            }
+            else
+            {
+                list.Add("API nuskaitymo klaida.");
+                return list;
+            }
+        }
+
+        static string GetSeason(string dateString)
+        {
+            DateTime observationTime = DateTime.Parse(dateString);
+
+            int month = observationTime.Month;
+            int day = observationTime.Day;
+
+            if (month == 12 || month == 1 || month == 2)
+            {
+                return "Ziema";
+            }
+            else if (month == 3 || month == 4 || month == 5)
+            {
+                return "Pavasaris";
+            }
+            else if (month == 6 || month == 7 || month == 8)
+            {
+                return "Vasara";
+            }
+            else
+            {
+                return "Ruduo";
+            }
+        }
+
+        static string GetWeather(string weatherCode)
+        {
+            switch (weatherCode)
+            {
+                case "clear":
+                    return "giedra";
+                case "partly-cloudy":
+                    return "mažai debesuota";
+                case "variable-cloudiness":
+                    return "nepastoviai debesuota";
+                case "cloudy-with-sunny-intervals":
+                    return "debesuota su pragiedruliais";
+                case "cloudy":
+                    return "debesuota";
+                case "thunder":
+                    return "perkūnija";
+                case "isolated-thunderstorms":
+                    return "trumpas lietus su perkūnija";
+                case "thunderstorms":
+                    return "lietus su perkūnija";
+                case "light-rain":
+                    return "nedidelis lietus";
+                case "rain":
+                    return "lietus";
+                case "heavy-rain":
+                    return "smarkus lietus";
+                case "rain-showers":
+                    return "trumpas lietus";
+                case "light-rain-at-times":
+                    return "protarpiais nedidelis lietus";
+                case "rain-at-times":
+                    return "protarpiais lietus";
+                case "light-sleet":
+                    return "nedidelė šlapdriba";
+                case "sleet":
+                    return "šlapdriba";
+                case "sleet-at-times":
+                    return "protarpiais šlapdriba";
+                case "sleet-showers":
+                    return "trumpa šlapdriba";
+                case "freezing-rain":
+                    return "lijundra";
+                case "hail":
+                    return "kruša";
+                case "light-snow":
+                    return "nedidelis sniegas";
+                case "snow":
+                    return "sniegas";
+                case "heavy-snow":
+                    return "smarkus sniegas";
+                case "snow-showers":
+                    return "trumpas sniegas";
+                case "snow-at-times":
+                    return "protarpiais sniegas";
+                case "light-snow-at-times":
+                    return "protarpiais nedidelis sniegas";
+                case "snowstorm":
+                    return "pūga";
+                case "mist":
+                    return "rūkana";
+                case "fog":
+                    return "rūkas";
+                case "squall":
+                    return "škvalas";
+                default:
+                    return "Visi";
+            }
+
+        }
     }
 }

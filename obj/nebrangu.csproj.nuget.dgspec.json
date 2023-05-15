@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu.csproj": {}
+    "C:\\Users\\tjutk\\Documents\\GitHub\\nebrangu\\nebrangu.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu.csproj": {
+    "C:\\Users\\tjutk\\Documents\\GitHub\\nebrangu\\nebrangu.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu.csproj",
+        "projectUniqueName": "C:\\Users\\tjutk\\Documents\\GitHub\\nebrangu\\nebrangu.csproj",
         "projectName": "nebrangu",
-        "projectPath": "C:\\Users\\zilvi\\Desktop\\nebrangu\\nebrangu.csproj",
-        "packagesPath": "C:\\Users\\zilvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zilvi\\Desktop\\nebrangu\\obj\\",
+        "projectPath": "C:\\Users\\tjutk\\Documents\\GitHub\\nebrangu\\nebrangu.csproj",
+        "packagesPath": "C:\\Users\\tjutk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tjutk\\Documents\\GitHub\\nebrangu\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\zilvi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tjutk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

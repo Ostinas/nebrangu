@@ -36,6 +36,7 @@ namespace nebrangu
         {
             base.OnModelCreating(modelBuilder);
 
+
             // define any custom model configuration here, such as setting up relationships between entities
         }
 
