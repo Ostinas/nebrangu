@@ -1,35 +1,41 @@
-﻿@model IEnumerable<nebrangu.Models.Order>
+﻿@model nebrangu.Models.Dispute
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Ginčo sukūrimas";
 }
 
-<h1>Create</h1>
-
-<h4>Dispute</h4>
+<h4>Ginčo sukūrimas</h4>
 <hr />
 <div class="row">
-
-    
-
-
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Update">
             <div class="form-group">
-                
+                <label asp-for="Problem" class="control-label"></label>
+                @Html.DropDownListFor(model => model.Problem.Id, new SelectList(new List<Problem>
+                {
+                    new Problem { Id = 1, Name = "Negavau prekės" },
+                    new Problem { Id = 2, Name = "Prekė pažeista" },
+                    new Problem { Id = 3, Name = "Prekė neatitinka aprašymo" },
+                }, "Id", "Name"), "Pasirinkite problemą", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="OrderId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.OrderId, new SelectList(Model.Orders, "Id", "Id"), "Pasirinkite užsakymą", new { @class = "form-control" })
+            </div>
+        
+            <div class="form-group">
+                <input type="submit" value="Sukurti" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Grįžti</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

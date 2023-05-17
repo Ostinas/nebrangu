@@ -1,22 +1,17 @@
 ﻿@model IEnumerable<nebrangu.Models.Dispute>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Ginčų sąrašas";
 }
 
-<h1>Index</h1>
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Sukurti ginčą</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Problem)
-            </th>
-            <th class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Solution)
             </th>
             <th class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Solution)
@@ -53,9 +48,7 @@
                 </td>
 
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Detaliau</a>
             </td>
         </tr>
 }

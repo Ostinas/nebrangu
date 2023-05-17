@@ -6,6 +6,7 @@ namespace nebrangu.Models
     [Table("orders")]
     public class Order
     {
+        [Display(Name = "Užsakymo ID")]
         public int Id { get; set; }
 
         [Display(Name = "Data")]

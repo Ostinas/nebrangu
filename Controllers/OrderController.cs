@@ -137,7 +137,12 @@ namespace nebrangu.Controllers
             var orderList = await _repo.GetUserOrders(userId);
             return orderList;
         }
-
+        
+            public async Task<List<Order>> getuserorders(int userId)
+        {
+            var orderList = await _repo.getuserorders(userId);
+            return orderList;
+        }
         public async Task<IActionResult> OpenOrder(int orderId)
         {
             var order = await _repo.GetOrderDetails(orderId);

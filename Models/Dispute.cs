@@ -7,6 +7,7 @@ namespace nebrangu.Models
     public class Dispute
     {
         public int Id { get; set; }
+
         [Display(Name = "Problema")]
         public virtual Problem Problem { get; set; }
         [Display(Name = "Sprendimas")]
@@ -23,7 +24,12 @@ namespace nebrangu.Models
         [Display(Name = "Pardavejas")]
         public User Seller { get; set; }
 
+        [Display(Name = "Užsakymo ID")]
         public int OrderId { get; set; }
+
+        public int SellerId { get; set; }
+
+        public int BuyerId { get; set; }
 
         public List<Order> Orders { get; set; }
     }

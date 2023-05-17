@@ -59,43 +59,45 @@ namespace nebrangu.Controllers
         {
             var orderController = new OrderController(_context,_httpContextAccessor);
 
-            var orders = await orderController.GetOrderList(1);
-
-
-            return View("DisputeCreatePage", orders);
+            var orders = await orderController.getuserorders(1);
+            var dispute = new Dispute()
+            {
+                Orders = orders,
+            };
+            return View("DisputeCreatePage", dispute);
         }
 
         // POST: Dispute/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SolutionScore")] Dispute dispute)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(dispute);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View("DisputeDetailsPage",dispute);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,SolutionScore")] Dispute dispute)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(dispute);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View("DisputeDetailsPage",dispute);
+        //}
 
         // GET: Dispute/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Dispute == null)
-            {
-                return NotFound();
-            }
-
-            var dispute = await _context.Dispute.FindAsync(id);
-            if (dispute == null)
-            {
-                return NotFound();
-            }
-            return View("DisputeDetailsPage", dispute);
-        }
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null || _context.Dispute == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //
+        //    var dispute = await _context.Dispute.FindAsync(id);
+        //    if (dispute == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View("DisputeDetailsPage", dispute);
+        //}
 
         // POST: Dispute/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -367,13 +369,17 @@ namespace nebrangu.Controllers
             return View("DisputeDetailsPage", dispute);
         }
 
-        public async Task<IActionResult> Update(int orderId,Dispute dispute)
+        public async Task<IActionResult> Update(Dispute dispute)
         {
-           if(await CheckDisputeDetais(orderId, dispute))
+           //var contr = new UserController(_context, _httpContextAccessor);
+           //dispute.Seller = await contr.GetUserInfo(1);
+           //dispute.Buyer = await contr.GetUserInfo(2);
+           if(await CheckDisputeDetais(dispute.OrderId, dispute))
             {
 
-                _repo.Create(dispute);
-                SolveDispute(orderId, dispute);
+                //var smth = await _repo.Create(dispute);
+                SolveDispute(smth.OrderId, smth);
+                SolveDispute(dispute.OrderId, dispute);
                 return View("DisputeDetailsPage", dispute);
             }
 

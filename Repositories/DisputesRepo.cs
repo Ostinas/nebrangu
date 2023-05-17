@@ -47,9 +47,10 @@ namespace nebrangu.Repositories
 
         public async Task<Dispute> Create(Dispute dispute)
         {
-            _context.Dispute.Add(dispute);
+            var entry = await _context.Dispute.AddAsync(dispute);
             await _context.SaveChangesAsync();
-            return dispute;
+
+            return entry.Entity;
         }
 
         public async Task<Dispute> Update(Dispute dispute)

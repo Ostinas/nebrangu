@@ -10938,19 +10938,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tjutk\\.nuget\\packages\\": {}
+    "C:\\Users\\Ostinas\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tjutk\\Documents\\GitHub\\nebrangu\\nebrangu.csproj",
+      "projectUniqueName": "C:\\Users\\Ostinas\\source\\repos\\Nebrangu\\nebrangu.csproj",
       "projectName": "nebrangu",
-      "projectPath": "C:\\Users\\tjutk\\Documents\\GitHub\\nebrangu\\nebrangu.csproj",
-      "packagesPath": "C:\\Users\\tjutk\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tjutk\\Documents\\GitHub\\nebrangu\\obj\\",
+      "projectPath": "C:\\Users\\Ostinas\\source\\repos\\Nebrangu\\nebrangu.csproj",
+      "packagesPath": "C:\\Users\\Ostinas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ostinas\\source\\repos\\Nebrangu\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\tjutk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ostinas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11018,7 +11023,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

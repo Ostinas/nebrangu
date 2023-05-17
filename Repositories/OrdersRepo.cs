@@ -82,6 +82,12 @@ namespace nebrangu.Repositories
                 .ToListAsync();
         }
 
+        public async Task<List<Order>> getuserorders(int userId)
+        {
+            return await _context.Orders
+                .ToListAsync();
+        }
+
         public async Task<Order> GetOrderDetails(int orderId)
         {
             return await _context.Orders
