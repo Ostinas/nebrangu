@@ -185,7 +185,9 @@ namespace nebrangu.Controllers
         {
             int count = 0;
 
-            //MANTAS SITA RELIZUOS SAKE
+            DisputeController disputeController = new DisputeController(_context,_httpContextAccessor);
+            count = await disputeController.GetLostDisputes(1);
+
             return count;
         }
 
@@ -223,5 +225,22 @@ namespace nebrangu.Controllers
 
             return orderList;
         }
+
+        public async Task<bool> DoesOrderContainTracking(int orderId)
+        {
+            var trakingCode = _repo.GetTrackingCode(orderId);
+
+            if (trakingCode == null)
+                return false;
+            
+            return true;
+        }
+
+        public async Task<double> GetOrderValue(int orderId)
+        {
+            var value = _repo.GetValue(orderId);
+            return value;
+        }
+
     }
 }

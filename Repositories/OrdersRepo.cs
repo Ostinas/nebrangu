@@ -123,5 +123,15 @@ namespace nebrangu.Repositories
                 .FirstOrDefault(o => o.Id == orderId);
             return order.PaymentMethod.Id;
         }
+
+        public int? GetTrackingCode(int orderId)
+        {
+            return _context.Orders.FirstOrDefault(o => o.Id == orderId).TrackingCode;
+        }
+
+        public double GetValue(int orderId)
+        {
+            return _context.Orders.FirstOrDefault(o => o.Id == orderId).Sum;
+        }
     }
 }

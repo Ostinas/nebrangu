@@ -34,8 +34,8 @@ namespace nebrangu.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            var contr = new DisputeController(_context, _httpContextAccessor, _disputesRepo, _repo);
-            var result = await contr.TrustCalculation(2);
+            var contr = new DisputeController(_context, _httpContextAccessor);
+            var result = await contr.TrustCalculation(1);
             var users = await _repo.GetAll();
             return View("UserListPage", users);
         }

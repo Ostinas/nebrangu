@@ -41,5 +41,7 @@ namespace nebrangu.Models
 
         [NotMapped]
         public string? PaymentDetails { get; set; }
+
+        public int? TrackingCode { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Google.Protobuf.WellKnownTypes;
+using Microsoft.EntityFrameworkCore;
 using nebrangu.Models;
 
 namespace nebrangu.Repositories
@@ -64,6 +65,45 @@ namespace nebrangu.Repositories
             _context.Dispute.Remove(dispute);
             await _context.SaveChangesAsync();
             return dispute;
+        }
+
+        public async void AddToScore(double value, int id)
+        {
+            var dispute = await _context.Dispute.FirstOrDefaultAsync(p => p.Id == id);
+
+            dispute.SolutionScore += value;
+
+            _context.Dispute.Update(dispute);
+            await _context.SaveChangesAsync();
+
+        }
+
+        public async void SideWithBuyer(int id)
+        {
+            var dispute = await _context.Dispute
+                .Include(o => o.Solution)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+
+
+            dispute.SolutionId = 1;
+
+            _context.Dispute.Update(dispute);
+            await _context.SaveChangesAsync();
+        }
+
+        public async void SideWithSeller(int id)
+        {
+            var dispute = await _context.Dispute
+               .Include(o => o.Solution)
+               .FirstOrDefaultAsync(p => p.Id == id);
+
+
+
+            dispute.SolutionId = 2;
+
+            _context.Dispute.Update(dispute);
+            await _context.SaveChangesAsync();
         }
 
     }
