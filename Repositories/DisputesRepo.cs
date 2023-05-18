@@ -89,6 +89,8 @@ namespace nebrangu.Repositories
 
             dispute.SolutionId = 1;
 
+            dispute.Solution = new Solution() { Id = 1, Name = "Pirkėjas teisus" };
+
             _context.Dispute.Update(dispute);
             await _context.SaveChangesAsync();
         }
@@ -102,6 +104,8 @@ namespace nebrangu.Repositories
 
 
             dispute.SolutionId = 2;
+            dispute.Solution = new Solution() { Id = 2, Name = "Pardavėjas teisus" };
+
 
             _context.Dispute.Update(dispute);
             await _context.SaveChangesAsync();

@@ -11,7 +11,7 @@
         <form asp-action="Update">
             <div class="form-group">
                 <label asp-for="Problem" class="control-label"></label>
-                @Html.DropDownListFor(model => model.Problem.Id, new SelectList(new List<Problem>
+                @Html.DropDownListFor(model => model.ProblemId, new SelectList(new List<Problem>
                 {
                     new Problem { Id = 1, Name = "Negavau prekės" },
                     new Problem { Id = 2, Name = "Prekė pažeista" },

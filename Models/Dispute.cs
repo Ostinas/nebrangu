@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Identity.Client;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace nebrangu.Models
@@ -9,6 +10,8 @@ namespace nebrangu.Models
         public int Id { get; set; }
 
         [Display(Name = "Problema")]
+
+        public int ProblemId { get; set; }
         public virtual Problem Problem { get; set; }
         [Display(Name = "Sprendimas")]
         public virtual Solution Solution { get; set; }

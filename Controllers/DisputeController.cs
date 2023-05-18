@@ -371,16 +371,26 @@ namespace nebrangu.Controllers
 
         public async Task<IActionResult> Update(Dispute dispute)
         {
-           //var contr = new UserController(_context, _httpContextAccessor);
-           //dispute.Seller = await contr.GetUserInfo(1);
-           //dispute.Buyer = await contr.GetUserInfo(2);
+           var contr = new UserController(_context, _httpContextAccessor);
+            //dispute.Seller = await contr.GetUserInfo(1);
+            //dispute.Buyer = await contr.GetUserInfo(2);
+
+            dispute.SellerId = 1;
+            dispute.BuyerId = 2;
+
+
+            //dispute.Solution = new Solution() { Id = 3, Name = "Bus sprendžiama toliau" };
+
+            //dispute.Problem.Name = "WTFFF";
+
+            dispute.SolutionId = 3;
            if(await CheckDisputeDetais(dispute.OrderId, dispute))
             {
 
-                //var smth = await _repo.Create(dispute);
+                var smth = await _repo.Create(dispute);
                 SolveDispute(smth.OrderId, smth);
-                SolveDispute(dispute.OrderId, dispute);
-                return View("DisputeDetailsPage", dispute);
+                //SolveDispute(dispute.OrderId, dispute);
+                return View("DisputeDetailsPage", smth);
             }
 
             return View("DisputeCreatePage");
